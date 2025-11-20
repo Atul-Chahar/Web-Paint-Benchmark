@@ -1,0 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f0f2f5;
+    height: 100vh;             
+    display: flex;        
+    justify-content: center;   
+    align-items: center;     
+}
+
+.main-container {
+    text-align: center;
+    width: 100%;
+    max-width: 450px; 
+}
+
+.app-title {
+    margin-bottom: 25px;
+    color: #202124; 
+    letter-spacing: -0.5px;
+}
+
+
+.audit-card {
+    background-color: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08); 
+    text-align: left; 
+}
+
+.card-header h2 {
+    font-size: 1.4rem;
+    margin-bottom: 8px;
+    color: #202124;
+}
+
+.card-header p {
+    color: #5f6368; 
+    font-size: 0.95rem;
+    margin-bottom: 30px;
+}
+
+
+.input-group {
+    margin-bottom: 25px;
+}
+
+label {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: #444;
+}
+
+select {
+    width: 100%;
+    padding: 12px;
+    font-size: 1rem;
+    border: 1px solid #dadce0;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+
+.run-btn {
+    width: 100%;
+    padding: 14px;
+    background-color: #1a73e8; 
+    color: white;
+    font-size: 1rem;
+    font-weight: bold;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s; 
+}
+
+.run-btn:hover {
+    background-color: #1557b0; 
+}
+
+.footer-text {
+    margin-top: 20px;
+    color: #9aa0a6;
+    font-size: 0.85rem;
+}
