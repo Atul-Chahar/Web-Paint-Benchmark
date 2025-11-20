@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Web Paint Benchmark</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="main-container">
+        <h1 class="app-title">Web Paint Benchmark</h1>
+
+        <div class="audit-card">
+            <div class="card-header">
+                <h2>Generate Report</h2>
+                <p>Select a scenario to analyze rendering performance.</p>
+            </div>
+
+            <div class="input-group">
+                <label for="scenario-select">Choose Test Scenario:</label>
+                <select id="scenario-select">
+                    <option value="heavy">🔴 Heavy Test (Filters & Shadows)</option>
+                    <option value="light">🟢 Light Test (Transforms & Opacity)</option>
+                </select>
+            </div>
+
+            <button class="run-btn">Run Audit</button>
+        </div>
+
+        <p class="footer-text">Designed for OJT Project Semester 1</p>
+    </div>
+
+</body>
+</html>
