@@ -4,84 +4,138 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Web Paint Benchmark - Audit Mode</title>
+    <title>Web Paint Benchmark - Performance Tools</title>
     <link rel="stylesheet" href="css/style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 </head>
 
 <body>
 
-    <div class="container">
-        <header class="app-header">
-            <h1>Web Paint Benchmark <span class="tag">AUDIT</span></h1>
-            <p class="subtitle">Enter a URL to generate a Lighthouse-style performance report.</p>
-
-            <div class="search-box">
-                <input type="url" id="urlInput" placeholder="https://example.com" value="https://google.com">
-                <button id="runBtn" onclick="runAudit()">Run Audit</button>
-            </div>
-            <div id="statusMessage" class="status"></div>
-        </header>
-
-        <div id="loader" class="loader hidden">
-            <div class="spinner"></div>
-            <p>Analyzing page via PageSpeed Insights...</p>
+    <nav class="navbar">
+        <div class="container nav-container">
+            <a href="#" class="logo">Web Paint Benchmark</a>
+            <ul class="nav-links">
+                <li><a href="#audit">Audit</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="benchmark.html">Benchmark Lab</a></li>
+            </ul>
         </div>
+    </nav>
 
-        <main id="dashboard" class="dashboard hidden">
+    <header class="hero">
+        <div class="container hero-content">
+            <h1>Master Your Web Performance</h1>
+            <p class="subtitle">Professional tools to audit, benchmark, and optimize your web applications.</p>
+            <a href="#audit" class="btn-primary">Start Auditing</a>
+        </div>
+    </header>
 
-            <div class="score-section">
-                <div class="gauge-wrapper">
-                    <svg viewBox="0 0 36 36" class="circular-chart" id="scoreChart">
-                        <path class="circle-bg"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <path class="circle" stroke-dasharray="0, 100"
-                            d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
-                        <text x="18" y="20.35" class="percentage">0</text>
-                    </svg>
-                </div>
-                <h2>Performance Score</h2>
-                <p class="device-info">Values estimated for a mobile device.</p>
+    <section id="audit" class="audit-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Website Audit</h2>
+                <p>Generate a comprehensive performance report powered by PageSpeed Insights.</p>
             </div>
 
-            <div class="metrics-grid">
-                <div class="metric-card" id="metric-fcp">
-                    <div class="dot"></div>
-                    <div class="meta">
-                        <h4>First Contentful Paint</h4>
-                        <span class="value">--</span>
-                    </div>
+            <div class="audit-tool">
+                <div class="search-box">
+                    <input type="url" id="urlInput" placeholder="https://example.com" value="https://google.com">
+                    <button id="runBtn" onclick="runAudit()">Run Audit</button>
                 </div>
-                <div class="metric-card" id="metric-lcp">
-                    <div class="dot"></div>
-                    <div class="meta">
-                        <h4>Largest Contentful Paint</h4>
-                        <span class="value">--</span>
-                    </div>
-                </div>
-                <div class="metric-card" id="metric-tbt">
-                    <div class="dot"></div>
-                    <div class="meta">
-                        <h4>Total Blocking Time</h4>
-                        <span class="value">--</span>
-                    </div>
-                </div>
-                <div class="metric-card" id="metric-cls">
-                    <div class="dot"></div>
-                    <div class="meta">
-                        <h4>Cumulative Layout Shift</h4>
-                        <span class="value">--</span>
-                    </div>
-                </div>
+                <div id="statusMessage" class="status"></div>
             </div>
 
-            <div class="diagnostics">
-                <h3>Top Opportunities</h3>
-                <ul id="opportunityList">
-                </ul>
+            <div id="loader" class="loader hidden">
+                <div class="spinner"></div>
+                <p>Analyzing page via PageSpeed Insights...</p>
             </div>
-        </main>
-    </div>
+
+            <div id="dashboard" class="dashboard hidden">
+                <div class="score-section">
+                    <div class="gauge-wrapper">
+                        <svg viewBox="0 0 36 36" class="circular-chart" id="scoreChart">
+                            <path class="circle-bg"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="circle" stroke-dasharray="0, 100"
+                                d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <text x="18" y="20.35" class="percentage">0</text>
+                        </svg>
+                    </div>
+                    <h3>Performance Score</h3>
+                    <p class="device-info">Mobile Emulation</p>
+                </div>
+
+                <div class="metrics-grid">
+                    <div class="metric-card" id="metric-fcp">
+                        <div class="dot"></div>
+                        <div class="meta">
+                            <h4>First Contentful Paint</h4>
+                            <span class="value">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card" id="metric-lcp">
+                        <div class="dot"></div>
+                        <div class="meta">
+                            <h4>Largest Contentful Paint</h4>
+                            <span class="value">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card" id="metric-tbt">
+                        <div class="dot"></div>
+                        <div class="meta">
+                            <h4>Total Blocking Time</h4>
+                            <span class="value">--</span>
+                        </div>
+                    </div>
+                    <div class="metric-card" id="metric-cls">
+                        <div class="dot"></div>
+                        <div class="meta">
+                            <h4>Cumulative Layout Shift</h4>
+                            <span class="value">--</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="diagnostics">
+                    <h3>Top Opportunities</h3>
+                    <ul id="opportunityList"></ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="features" class="features-section">
+        <div class="container">
+            <div class="section-header">
+                <h2>Our Features</h2>
+                <p>Everything you need to build faster websites.</p>
+            </div>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="icon">🚀</div>
+                    <h3>Performance Audit</h3>
+                    <p>Get detailed insights into your Core Web Vitals and actionable tips to improve speed.</p>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">🧪</div>
+                    <h3>CSS Benchmark</h3>
+                    <p>Stress test your browser's rendering engine with complex CSS scenarios.</p>
+                    <a href="benchmark.html" class="link-btn">Open Lab &rarr;</a>
+                </div>
+                <div class="feature-card">
+                    <div class="icon">📱</div>
+                    <h3>Mobile First</h3>
+                    <p>Analysis prioritizes mobile performance to ensure great experience for all users.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2024 Web Paint Benchmark. All rights reserved.</p>
+        </div>
+    </footer>
 
     <script src="js/script.js"></script>
 </body>
