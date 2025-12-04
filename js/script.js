@@ -1,3 +1,4 @@
+// Main function to initiate the PageSpeed Audit
 function runAudit() {
     const url = document.getElementById('urlInput').value;
     const dashboard = document.getElementById('dashboard');
@@ -13,9 +14,9 @@ function runAudit() {
     loader.classList.remove('hidden');
     status.textContent = "Contacting Google PageSpeed API...";
 
-   const apiKey = 'AIzaSyBZVHlMfA5Yn7SYb3LsuEUEhMvXHvEGF4A'; 
-   const apiEndpoint = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=PERFORMANCE&strategy=mobile&key=${apiKey}`;
-    
+    const apiKey = 'AIzaSyBZVHlMfA5Yn7SYb3LsuEUEhMvXHvEGF4A';
+    const apiEndpoint = `https://www.googleapis.com/pagespeedonline/v5/runPagespeed?url=${encodeURIComponent(url)}&category=PERFORMANCE&strategy=mobile&key=${apiKey}`;
+
     fetch(apiEndpoint)
         .then(response => {
             if (!response.ok) throw new Error("Failed to fetch data. Check URL.");
@@ -34,16 +35,17 @@ function runAudit() {
         });
 }
 
+// Render the audit results to the dashboard
 function renderDashboard(data) {
-    const lighthouse = data.lighthouseResult;
-    
-    const score = lighthouse.categories.performance.score * 100;
+    const pageSpeedResult = data.lighthouseResult;
+
+    const score = pageSpeedResult.categories.performance.score * 100;
     const gaugeCircle = document.querySelector('.circle');
     const scoreText = document.querySelector('.percentage');
-    
+
     scoreText.textContent = Math.round(score);
     gaugeCircle.style.strokeDasharray = `${score}, 100`;
-    
+
     gaugeCircle.classList.remove('pass', 'average', 'fail');
     if (score >= 90) gaugeCircle.classList.add('pass');
     else if (score >= 50) gaugeCircle.classList.add('average');
@@ -57,26 +59,26 @@ function renderDashboard(data) {
     };
 
     for (const [key, elementId] of Object.entries(metrics)) {
-        const audit = lighthouse.audits[key];
+        const audit = pageSpeedResult.audits[key];
         const el = document.getElementById(elementId);
         const valueEl = el.querySelector('.value');
         const dotEl = el.querySelector('.dot');
 
         valueEl.textContent = audit.displayValue;
-        
-        dotEl.className = 'dot'; 
+
+        dotEl.className = 'dot';
         if (audit.score >= 0.9) dotEl.classList.add('pass');
         else if (audit.score >= 0.5) dotEl.classList.add('average');
         else dotEl.classList.add('fail');
     }
 
     const list = document.getElementById('opportunityList');
-    list.innerHTML = ''; 
+    list.innerHTML = '';
 
-    const opportunities = Object.values(lighthouse.audits)
+    const opportunities = Object.values(pageSpeedResult.audits)
         .filter(audit => audit.details && audit.details.type === 'opportunity' && audit.score < 0.9)
-        .sort((a, b) => (a.score - b.score)) 
-        .slice(0, 4); 
+        .sort((a, b) => (a.score - b.score))
+        .slice(0, 4);
 
     opportunities.forEach(op => {
         const li = document.createElement('li');

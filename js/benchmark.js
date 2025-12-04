@@ -28,6 +28,7 @@ const modalScore = document.getElementById('modalScore');
 const modalScenario = document.getElementById('modalScenario');
 const modalElements = document.getElementById('modalElements');
 
+// Initialization
 function init() {
     document.getElementById('cpuCores').textContent = navigator.hardwareConcurrency || 'Unknown';
     document.getElementById('ram').textContent = navigator.deviceMemory || 'Unknown';
@@ -42,6 +43,7 @@ function init() {
     initChart();
 }
 
+// Event Listeners
 countInput.addEventListener('input', (e) => {
     state.elementsToRender = parseInt(e.target.value);
     countValue.textContent = `${state.elementsToRender} elements`;
@@ -61,6 +63,7 @@ modal.addEventListener('click', (e) => {
     if (e.target === modal) closeModal();
 });
 
+// Core Benchmark Logic
 function startBenchmark() {
     if (state.isRunning) return;
 
@@ -120,6 +123,7 @@ function createParticles(type) {
     state.particles = Array.from(stage.children);
 }
 
+// Animation Loop
 function loop(timestamp) {
     if (!state.isRunning) return;
 
@@ -231,6 +235,7 @@ function renderHistory() {
 }
 
 let chart;
+// Charting
 function initChart() {
     const ctx = document.getElementById('perfChart').getContext('2d');
     chart = new Chart(ctx, {
