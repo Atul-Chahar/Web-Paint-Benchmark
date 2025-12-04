@@ -19,6 +19,15 @@ const countInput = document.getElementById('elementCount');
 const countValue = document.getElementById('countValue');
 const historyList = document.getElementById('historyList');
 
+// Modal Elements
+const modal = document.getElementById('resultsModal');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const modalCloseBtn = document.getElementById('modalCloseBtn');
+const modalFPS = document.getElementById('modalFPS');
+const modalScore = document.getElementById('modalScore');
+const modalScenario = document.getElementById('modalScenario');
+const modalElements = document.getElementById('modalElements');
+
 function init() {
     document.getElementById('cpuCores').textContent = navigator.hardwareConcurrency || 'Unknown';
     document.getElementById('ram').textContent = navigator.deviceMemory || 'Unknown';
@@ -40,6 +49,17 @@ countInput.addEventListener('input', (e) => {
 
 startBtn.addEventListener('click', startBenchmark);
 stopBtn.addEventListener('click', stopBenchmark);
+
+// Modal Event Listeners
+function closeModal() {
+    modal.classList.add('hidden');
+}
+
+closeModalBtn.addEventListener('click', closeModal);
+modalCloseBtn.addEventListener('click', closeModal);
+modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModal();
+});
 
 function startBenchmark() {
     if (state.isRunning) return;
@@ -178,7 +198,12 @@ function calculateFinalScore() {
 
     renderHistory();
 
-    alert(`Benchmark Finished!\nAverage FPS: ${finalFPS}\nScore: ${finalScore}`);
+    // Show Modal
+    modalFPS.textContent = finalFPS;
+    modalScore.textContent = finalScore;
+    modalScenario.textContent = scenarioName;
+    modalElements.textContent = state.elementsToRender;
+    modal.classList.remove('hidden');
 }
 
 function renderHistory() {
