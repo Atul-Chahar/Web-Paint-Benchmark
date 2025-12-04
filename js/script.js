@@ -1,14 +1,36 @@
+// Helper to normalize and validate URL
+function normalizeUrl(input) {
+    let url = input.trim();
+    // Add https:// if missing
+    if (!/^https?:\/\//i.test(url)) {
+        url = 'https://' + url;
+    }
+
+    try {
+        // Check if valid URL structure
+        new URL(url);
+        return url;
+    } catch (e) {
+        return null;
+    }
+}
+
 // Main function to initiate the PageSpeed Audit
 function runAudit() {
-    const url = document.getElementById('urlInput').value;
+    const rawUrl = document.getElementById('urlInput').value;
     const dashboard = document.getElementById('dashboard');
     const loader = document.getElementById('loader');
     const status = document.getElementById('statusMessage');
 
+    const url = normalizeUrl(rawUrl);
+
     if (!url) {
-        alert("Please enter a valid URL");
+        alert("Please enter a valid URL (e.g., example.com)");
         return;
     }
+
+    // Update input field to show the normalized URL
+    document.getElementById('urlInput').value = url;
 
     dashboard.classList.add('hidden');
     loader.classList.remove('hidden');
