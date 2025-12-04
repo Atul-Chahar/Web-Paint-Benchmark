@@ -92,6 +92,37 @@
         </main>
     </div>
 
+    <!-- Results Modal -->
+    <div id="resultsModal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Benchmark Results</h2>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="result-item">
+                    <span class="result-label">Average FPS</span>
+                    <span id="modalFPS" class="result-value">0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Score</span>
+                    <span id="modalScore" class="result-value">0</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Scenario</span>
+                    <span id="modalScenario" class="result-value">--</span>
+                </div>
+                <div class="result-item">
+                    <span class="result-label">Elements</span>
+                    <span id="modalElements" class="result-value">0</span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="modalCloseBtn" class="btn-primary">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script src="js/benchmark.js"></script>
 </body>
 
