@@ -6,7 +6,8 @@ const state = {
     fpsHistory: [],
     particles: [],
     animationId: null,
-    elementsToRender: 1000
+    elementsToRender: 1000,
+    history: []
 };
 
 const startBtn = document.getElementById('startBtn');
@@ -16,6 +17,7 @@ const fpsDisplay = document.getElementById('fpsCounter');
 const scoreDisplay = document.getElementById('scoreDisplay');
 const countInput = document.getElementById('elementCount');
 const countValue = document.getElementById('countValue');
+const historyList = document.getElementById('historyList');
 
 function init() {
     document.getElementById('cpuCores').textContent = navigator.hardwareConcurrency || 'Unknown';
@@ -157,9 +159,50 @@ function animateJS(type) {
 function calculateFinalScore() {
     const avgFPS = state.fpsHistory.reduce((a, b) => a + b, 0) / state.fpsHistory.length || 0;
     const rawScore = (avgFPS / 60) * (state.elementsToRender / 10);
+    const finalScore = Math.round(rawScore);
+    const finalFPS = Math.round(avgFPS);
 
-    scoreDisplay.textContent = Math.round(rawScore);
-    alert(`Benchmark Finished!\nAverage FPS: ${Math.round(avgFPS)}\nScore: ${Math.round(rawScore)}`);
+    scoreDisplay.textContent = finalScore;
+
+    // Save to history
+    const scenarioSelect = document.getElementById('scenarioSelect');
+    const scenarioName = scenarioSelect.options[scenarioSelect.selectedIndex].text.split(':')[0];
+
+    state.history.unshift({
+        scenario: scenarioName,
+        count: state.elementsToRender,
+        fps: finalFPS,
+        score: finalScore,
+        time: new Date().toLocaleTimeString()
+    });
+
+    renderHistory();
+
+    alert(`Benchmark Finished!\nAverage FPS: ${finalFPS}\nScore: ${finalScore}`);
+}
+
+function renderHistory() {
+    if (state.history.length === 0) {
+        historyList.innerHTML = '<li class="empty-state">No tests run yet.</li>';
+        return;
+    }
+
+    historyList.innerHTML = '';
+    state.history.forEach(run => {
+        const li = document.createElement('li');
+        li.className = 'history-item';
+        li.innerHTML = `
+            <div class="run-info">
+                <span class="run-scenario">${run.scenario}</span>
+                <span class="run-meta">${run.count} elements</span>
+            </div>
+            <div class="run-stats">
+                <span class="run-fps">${run.fps} FPS</span>
+                <span class="run-score">${run.score}</span>
+            </div>
+        `;
+        historyList.appendChild(li);
+    });
 }
 
 let chart;
